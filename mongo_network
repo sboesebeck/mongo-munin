@@ -24,26 +24,27 @@ def value_generator(dict):
                  yield str(k).replace(" ","_").replace("/","-").replace("(","_").replace(")","_")+".value "+str(v)
 
 
+name = "network"
+
 
 def doData():
-    ss = getServerStatus()
-    for k,v in ss["opcounters"].iteritems():
-        print( str(k) + ".value " + str(v) )
+    print name + ".bytesIn.value " + str( getServerStatus()["network"]["bytesIn"] )
+    print name + ".bytesOut.value " + str( getServerStatus()["network"]["bytesOut"] )
+    print name + ".numRequests.value " + str( getServerStatus()["network"]["numRequests"] )
 
 def doConfig():
 
-    print "graph_title MongoDB ops"
+    print "graph_title MongoDB current network stats"
     print "graph_args --base 1000 -l 0"
-    print "graph_vlabel ops / ${graph_period}"
+    print "graph_vlabel network"
     print "graph_category MongoDB"
-    print "graph_total total"
 
-    for k in getServerStatus()["opcounters"]:
-        print k + ".label " + k
-        print k + ".min 0"
-        print k + ".type COUNTER"
-        print k + ".max 500000"
-        print k + ".draw LINE1"
+    print name + ".label " + name
+
+
+
+
+
 
 if __name__ == "__main__":          
 	

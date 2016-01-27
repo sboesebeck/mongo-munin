@@ -3,7 +3,9 @@ name = "connections"
 
 
 def doData():
-    print name + ".value " + str( getServerStatus()["connections"]["current"] )
+    ss=getServerStatus()["connections"] 
+    for v in value_generator(ss): 
+       print(name+"."+v)
 
 def doConfig():
 

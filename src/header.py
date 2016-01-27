@@ -11,3 +11,12 @@ def getServerStatus():
       c = pymongo.MongoClient()
 
     return c.admin.command('serverStatus', workingSet=True)
+
+def value_generator(dict):
+      for k, v in dict.items():
+            if type(v) == type(dict):
+                 for id_val in value_generator(v):
+                       yield str(k)+"."+id_val
+            else:
+                 yield str(k).replace(" ","_").replace("/","-").replace("(","_").replace(")","_")+".value "+str(v)
+
